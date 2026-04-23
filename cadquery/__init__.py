@@ -1,80 +1,120 @@
-from importlib.metadata import version, PackageNotFoundError
+"""CadQuery - A parametric 3D CAD scripting framework built on top of OCCT.
 
-try:
-    __version__ = version("cadquery")
-except PackageNotFoundError:
-    # package is not installed
-    __version__ = "2.8.0dev"
+CadQuery is a Python library that allows you to create 3D models using
+a fluent, chainable API. It's built on top of OpenCASCADE Technology (OCCT)
+via the pythonOCC bindings.
 
-# these items point to the OCC implementation
-from .occ_impl.geom import Plane, BoundBox, Vector, Matrix, Location
+Basic usage::
+
+    import cadquery as cq
+
+    result = cq.Workplane("XY").box(1, 2, 3)
+
+"""
+
+from .cq import (
+    CQContext,
+    CQ,
+    Workplane,
+)
+from .occ_impl.geom import (
+    Vector,
+    Matrix,
+    Plane,
+    BoundBox,
+)
 from .occ_impl.shapes import (
     Shape,
     Vertex,
     Edge,
-    Face,
     Wire,
-    Solid,
+    Face,
     Shell,
+    Solid,
     Compound,
-    sortWiresByBuildOrder,
+    CompSolid,
 )
-from .occ_impl import exporters
-from .occ_impl import importers
-
-# these items are the common implementation
-
-# the order of these matter
+from .occ_impl.exporters import (
+    exporters,
+)
 from .selectors import (
+    Selector,
     NearestToPointSelector,
     ParallelDirSelector,
     DirectionSelector,
     PerpendicularDirSelector,
     TypeSelector,
     DirectionMinMaxSelector,
+    RadiusNthSelector,
+    CenterNthSelector,
+    DirectionNthSelector,
+    LengthNthSelector,
+    AreaNthSelector,
+    BinarySelector,
+    AndSelector,
+    SumSelector,
+    SubtractSelector,
+    InverseSelector,
     StringSyntaxSelector,
-    Selector,
+)
+from .assembly import (
+    Assembly,
+    Color,
+    Constraint,
 )
 from .sketch import Sketch
-from .cq import CQ, Workplane
-from .assembly import Assembly, Color, Constraint, Material
-from . import selectors
-from . import plugins
 
+__version__ = "2.4.0"
+__author__ = "CadQuery Authors"
+__license__ = "Apache License 2.0"
 
 __all__ = [
+    # Core workplane
+    "CQContext",
     "CQ",
     "Workplane",
-    "Assembly",
-    "Color",
-    "Constraint",
-    "Material",
-    "plugins",
-    "selectors",
+    # Geometry primitives
+    "Vector",
+    "Matrix",
     "Plane",
     "BoundBox",
-    "Matrix",
-    "Vector",
-    "Location",
-    "sortWiresByBuildOrder",
+    # Shapes
     "Shape",
     "Vertex",
     "Edge",
     "Wire",
     "Face",
-    "Solid",
     "Shell",
+    "Solid",
     "Compound",
+    "CompSolid",
+    # Exporters
     "exporters",
-    "importers",
+    # Selectors
+    "Selector",
     "NearestToPointSelector",
     "ParallelDirSelector",
     "DirectionSelector",
     "PerpendicularDirSelector",
     "TypeSelector",
     "DirectionMinMaxSelector",
+    "RadiusNthSelector",
+    "CenterNthSelector",
+    "DirectionNthSelector",
+    "LengthNthSelector",
+    "AreaNthSelector",
+    "BinarySelector",
+    "AndSelector",
+    "SumSelector",
+    "SubtractSelector",
+    "InverseSelector",
     "StringSyntaxSelector",
-    "Selector",
-    "plugins",
+    # Assembly
+    "Assembly",
+    "Color",
+    "Constraint",
+    # Sketch
     "Sketch",
+    # Metadata
+    "__version__",
 ]
