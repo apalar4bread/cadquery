@@ -10,6 +10,8 @@ Basic usage::
 
     result = cq.Workplane("XY").box(1, 2, 3)
 
+Note: I'm using this fork for learning CadQuery internals. The upstream
+project lives at https://github.com/CadQuery/cadquery.
 """
 
 from .cq import (
