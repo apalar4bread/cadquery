@@ -12,6 +12,12 @@ Basic usage::
 
 Note: I'm using this fork for learning CadQuery internals. The upstream
 project lives at https://github.com/CadQuery/cadquery.
+
+Personal notes:
+- CompSolid is rarely used in practice; it represents a collection of solids
+  sharing faces. Mostly encountered when working with STEP imports.
+- StringSyntaxSelector is the magic behind the ">X" / "<Y" string selectors.
+- Assembly uses a constraint solver under the hood (see assembly.py).
 """
 
 from .cq import (
